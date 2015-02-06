@@ -7,13 +7,13 @@ var app = {
         if(localStorage.getItem('dbLocalVersion') == null) {
             localStorage.setItem('dbLocalVersion','-1');
         }
-        return openDatabase('dbDarpan', localStorage.getItem('dbLocalVersion'), 'dbDarpan', (5 * 1022 * 1022));
+        return openDatabase('dbEGA', localStorage.getItem('dbLocalVersion'), 'dbEGA', (5 * 1022 * 1022));
     })(),
     imgDb: (function() {
         if(localStorage.getItem('imgDbLocalVersion') == null) {
             localStorage.setItem('imgDbLocalVersion','-1');
         }
-        return openDatabase('imgDbDarpan', localStorage.getItem('imgDbLocalVersion'), 'imgDbDarpan', (5 * 1022 * 1022));
+        return openDatabase('imgDbEGA', localStorage.getItem('imgDbLocalVersion'), 'imgDbEGA', (5 * 1022 * 1022));
     })(),
     initialize: function() {
         document.addEventListener('deviceready', app.onDeviceReady, false);
@@ -31,6 +31,9 @@ var app = {
             $('#startup_splash').remove();
         }, 6000);
         if(app.imgDb.version == -1) {
+            localStorage.clear();
+            localStorage.setItem('dbLocalVersion','-1');
+            localStorage.setItem('imgDbLocalVersion','-1');
             app.imgDb.transaction(function (tx) {
                 tx.executeSql("CREATE TABLE IF NOT EXISTS profile_pic (filename TEXT NOT NULL, timestamp TEXT NOT NULL)",[],
                     function (tx, r) {
@@ -51,7 +54,7 @@ var app = {
         }
     },
     doOnlineTasks: function() {
-        var urlData = 'http://darpan.incorelabs.com/db_version.php';
+        var urlData = 'http://ega.incorelabs.com/db_version.php';
         if(localStorage.getItem('dbLocalVersion') == -1) {
             $.getJSON(urlData).done(app.checkWithLocalDB);
         } else {
@@ -85,25 +88,25 @@ var app = {
 
             app.requestStatus = [false, false, false, false, false, false, false];
 
-            $.getJSON('http://darpan.incorelabs.com/users.php', function(userData) {
+            $.getJSON('http://ega.incorelabs.com/users.php', function(userData) {
                 app.createTable(userData,"users",0);
             });
-            $.getJSON('http://darpan.incorelabs.com/male.php', function(maleData) {
+            $.getJSON('http://ega.incorelabs.com/male.php', function(maleData) {
                 app.createTable(maleData,"male",1);
             });
-            $.getJSON('http://darpan.incorelabs.com/female.php', function(femaleData) {
+            $.getJSON('http://ega.incorelabs.com/female.php', function(femaleData) {
                 app.createTable(femaleData,"female",2);
             });
-            $.getJSON('http://darpan.incorelabs.com/common.php', function(commonData) {
+            $.getJSON('http://ega.incorelabs.com/common.php', function(commonData) {
                 app.createTable(commonData,"common",3);
             });
-            $.getJSON('http://darpan.incorelabs.com/kids.php', function(kidsData) {
+            $.getJSON('http://ega.incorelabs.com/kids.php', function(kidsData) {
                 app.createTable(kidsData,"kids",4);
             });
-            $.getJSON('http://darpan.incorelabs.com/directors.php', function(directorsData) {
+            $.getJSON('http://ega.incorelabs.com/directors.php', function(directorsData) {
                 app.createTable(directorsData,"directors",5);
             });
-            $.getJSON('http://darpan.incorelabs.com/events.php', function(eventsData) {
+            $.getJSON('http://ega.incorelabs.com/events.php', function(eventsData) {
                 app.createTable(eventsData,"events",6);
             });
 
@@ -119,7 +122,7 @@ var app = {
         }
     },
     getImageAssets: function () {
-        var urlImages = 'http://darpan.incorelabs.com/images/file-list.php?key=kamlesh';
+        var urlImages = 'http://ega.incorelabs.com/images/file-list.php?key=kamlesh';
         var dirReference = app.getDirectoryReference();
         dirReference.done(function(imgDir) {
             app.imgDir = imgDir;
