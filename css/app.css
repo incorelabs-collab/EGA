@@ -185,6 +185,37 @@ a:hover {
     color: #00b4ff;
 }
 
+/* Past Leaders Page */
+
+.pastLeaderHeaderFont {
+    font-size: x-large;
+}
+
+.pastLeadersBlock {
+    border-style: outset;
+    border-radius: 1.5em;
+    border-top-color: #e7e7e7;
+    border-left-color: #e7e7e7;
+    border-right-color: #ffffff;
+    border-bottom-color: #ffffff;
+    padding-top: 1.5em;
+    padding-bottom: 1.5em;
+    margin-left: -0.4em;
+    margin-right: -0.4em;
+}
+
+.pastLeadersImgBlock {
+    padding-right: 0;
+}
+
+.noLinkMember {
+    font-size: 1.3em;
+}
+
+.tenureLink {
+    font-size: 0.9em;
+}
+
 /* Specific to Different Devices */
 @media (min-width: 240px) and (max-width: 319px) and (orientation: portrait) {
     .memberImgAndData {

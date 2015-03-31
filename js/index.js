@@ -86,7 +86,7 @@ var app = {
 
             localStorage.setItem('dbCurrentOnline',json[0][0]);
 
-            app.requestStatus = [false, false, false, false, false, false, false];
+            app.requestStatus = [false, false, false, false, false, false, false, false, false];
 
             $.getJSON('http://ega.incorelabs.com/users.php', function(userData) {
                 app.createTable(userData,"users",0);
@@ -108,6 +108,12 @@ var app = {
             });
             $.getJSON('http://ega.incorelabs.com/events.php', function(eventsData) {
                 app.createTable(eventsData,"events",6);
+            });
+            $.getJSON('http://ega.incorelabs.com/pastLeaders/past_president.php', function(pastPresidentData) {
+                app.createTable(pastPresidentData,"past_presidents",7);
+            });
+            $.getJSON('http://ega.incorelabs.com/pastLeaders/past_secretary.php', function(pastSecretaryData) {
+                app.createTable(pastSecretaryData,"past_secretaries",8);
             });
 
         } else {

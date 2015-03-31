@@ -48,6 +48,7 @@ $(document).ready(function() {
                     memberConcatString = "";
                 }
                 memberConcatString = "";
-            }, app.dbQueryError);
+            }, app.dbQueryError
+        );
     });
 });
